@@ -1,0 +1,438 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		28891D0A20CE750800A2C4C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28891D0920CE750800A2C4C5 /* AppDelegate.swift */; };
+		28891D0C20CE750800A2C4C5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28891D0B20CE750800A2C4C5 /* ViewController.swift */; };
+		28891D0F20CE750800A2C4C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28891D0D20CE750800A2C4C5 /* Main.storyboard */; };
+		28891D1120CE750A00A2C4C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28891D1020CE750A00A2C4C5 /* Assets.xcassets */; };
+		28891D1420CE750A00A2C4C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28891D1220CE750A00A2C4C5 /* LaunchScreen.storyboard */; };
+		28891D1D20CE755900A2C4C5 /* ZLCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28891D1C20CE755900A2C4C5 /* ZLCameraViewController.swift */; };
+		28D0DA8B20D0B5F3008DBCEE /* ZLPhotoPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D0DA8A20D0B5F3008DBCEE /* ZLPhotoPreviewViewController.swift */; };
+		28D0DA8D20D0DF95008DBCEE /* ZLBlurButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D0DA8C20D0DF95008DBCEE /* ZLBlurButton.swift */; };
+		500312FBF414CA2875B4B4AD /* Pods_ZLCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CA1E582EC339FE109A8426 /* Pods_ZLCamera.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		28891D0620CE750800A2C4C5 /* ZLCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZLCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		28891D0920CE750800A2C4C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		28891D0B20CE750800A2C4C5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		28891D0E20CE750800A2C4C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		28891D1020CE750A00A2C4C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		28891D1320CE750A00A2C4C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		28891D1520CE750A00A2C4C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28891D1C20CE755900A2C4C5 /* ZLCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLCameraViewController.swift; sourceTree = "<group>"; };
+		28CA1E582EC339FE109A8426 /* Pods_ZLCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZLCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		28D0DA8A20D0B5F3008DBCEE /* ZLPhotoPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLPhotoPreviewViewController.swift; sourceTree = "<group>"; };
+		28D0DA8C20D0DF95008DBCEE /* ZLBlurButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLBlurButton.swift; sourceTree = "<group>"; };
+		7669415A3910B73267520F99 /* Pods-ZLCamera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZLCamera.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZLCamera/Pods-ZLCamera.release.xcconfig"; sourceTree = "<group>"; };
+		79C25A18289875191E9EB9AD /* Pods-ZLCamera.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZLCamera.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZLCamera/Pods-ZLCamera.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		28891D0320CE750800A2C4C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				500312FBF414CA2875B4B4AD /* Pods_ZLCamera.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		28891CFD20CE750800A2C4C5 = {
+			isa = PBXGroup;
+			children = (
+				28891D0820CE750800A2C4C5 /* ZLCamera */,
+				28891D0720CE750800A2C4C5 /* Products */,
+				991C9FA2DD5CC65461DD378F /* Pods */,
+				FB3411F926EA1D8CA9855166 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		28891D0720CE750800A2C4C5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				28891D0620CE750800A2C4C5 /* ZLCamera.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		28891D0820CE750800A2C4C5 /* ZLCamera */ = {
+			isa = PBXGroup;
+			children = (
+				28891D1B20CE754600A2C4C5 /* ZLCameraViewController */,
+				28891D0920CE750800A2C4C5 /* AppDelegate.swift */,
+				28891D0B20CE750800A2C4C5 /* ViewController.swift */,
+				28891D0D20CE750800A2C4C5 /* Main.storyboard */,
+				28891D1020CE750A00A2C4C5 /* Assets.xcassets */,
+				28891D1220CE750A00A2C4C5 /* LaunchScreen.storyboard */,
+				28891D1520CE750A00A2C4C5 /* Info.plist */,
+			);
+			path = ZLCamera;
+			sourceTree = "<group>";
+		};
+		28891D1B20CE754600A2C4C5 /* ZLCameraViewController */ = {
+			isa = PBXGroup;
+			children = (
+				28D0DA8C20D0DF95008DBCEE /* ZLBlurButton.swift */,
+				28891D1C20CE755900A2C4C5 /* ZLCameraViewController.swift */,
+				28D0DA8A20D0B5F3008DBCEE /* ZLPhotoPreviewViewController.swift */,
+			);
+			path = ZLCameraViewController;
+			sourceTree = "<group>";
+		};
+		991C9FA2DD5CC65461DD378F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				79C25A18289875191E9EB9AD /* Pods-ZLCamera.debug.xcconfig */,
+				7669415A3910B73267520F99 /* Pods-ZLCamera.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FB3411F926EA1D8CA9855166 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				28CA1E582EC339FE109A8426 /* Pods_ZLCamera.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		28891D0520CE750800A2C4C5 /* ZLCamera */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28891D1820CE750A00A2C4C5 /* Build configuration list for PBXNativeTarget "ZLCamera" */;
+			buildPhases = (
+				E22F5469C5983B9C5307B6DB /* [CP] Check Pods Manifest.lock */,
+				28891D0220CE750800A2C4C5 /* Sources */,
+				28891D0320CE750800A2C4C5 /* Frameworks */,
+				28891D0420CE750800A2C4C5 /* Resources */,
+				4385DA4FFB323E039B2CA5D4 /* [CP] Embed Pods Frameworks */,
+				3E8FE0A67EC81AEC7D558A62 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZLCamera;
+			productName = ZLCamera;
+			productReference = 28891D0620CE750800A2C4C5 /* ZLCamera.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		28891CFE20CE750800A2C4C5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "周麟";
+				TargetAttributes = {
+					28891D0520CE750800A2C4C5 = {
+						CreatedOnToolsVersion = 9.4;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 28891D0120CE750800A2C4C5 /* Build configuration list for PBXProject "ZLCamera" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 28891CFD20CE750800A2C4C5;
+			productRefGroup = 28891D0720CE750800A2C4C5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				28891D0520CE750800A2C4C5 /* ZLCamera */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		28891D0420CE750800A2C4C5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28891D1420CE750A00A2C4C5 /* LaunchScreen.storyboard in Resources */,
+				28891D1120CE750A00A2C4C5 /* Assets.xcassets in Resources */,
+				28891D0F20CE750800A2C4C5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3E8FE0A67EC81AEC7D558A62 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZLCamera/Pods-ZLCamera-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4385DA4FFB323E039B2CA5D4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZLCamera/Pods-ZLCamera-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZLCamera/Pods-ZLCamera-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E22F5469C5983B9C5307B6DB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZLCamera-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		28891D0220CE750800A2C4C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28891D0C20CE750800A2C4C5 /* ViewController.swift in Sources */,
+				28891D1D20CE755900A2C4C5 /* ZLCameraViewController.swift in Sources */,
+				28D0DA8B20D0B5F3008DBCEE /* ZLPhotoPreviewViewController.swift in Sources */,
+				28D0DA8D20D0DF95008DBCEE /* ZLBlurButton.swift in Sources */,
+				28891D0A20CE750800A2C4C5 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		28891D0D20CE750800A2C4C5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28891D0E20CE750800A2C4C5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		28891D1220CE750A00A2C4C5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28891D1320CE750A00A2C4C5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		28891D1620CE750A00A2C4C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		28891D1720CE750A00A2C4C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		28891D1920CE750A00A2C4C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79C25A18289875191E9EB9AD /* Pods-ZLCamera.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 773BQ977QR;
+				INFOPLIST_FILE = ZLCamera/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhoulin.ZLCamera;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		28891D1A20CE750A00A2C4C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7669415A3910B73267520F99 /* Pods-ZLCamera.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 773BQ977QR;
+				INFOPLIST_FILE = ZLCamera/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhoulin.ZLCamera;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		28891D0120CE750800A2C4C5 /* Build configuration list for PBXProject "ZLCamera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28891D1620CE750A00A2C4C5 /* Debug */,
+				28891D1720CE750A00A2C4C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28891D1820CE750A00A2C4C5 /* Build configuration list for PBXNativeTarget "ZLCamera" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28891D1920CE750A00A2C4C5 /* Debug */,
+				28891D1A20CE750A00A2C4C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 28891CFE20CE750800A2C4C5 /* Project object */;
+}
