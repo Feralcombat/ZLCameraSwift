@@ -36,10 +36,10 @@ class ZLBlurButton: UIVisualEffectView {
         self.circleView.addGestureRecognizer(self.longGesture!)
         
         self.circleView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(12)
-            make.left.equalTo(self.contentView).offset(12)
-            make.right.equalTo(self.contentView).offset(-12)
-            make.bottom.equalTo(self.contentView).offset(-12)
+            make.top.equalTo(self.contentView).offset(10)
+            make.left.equalTo(self.contentView).offset(10)
+            make.right.equalTo(self.contentView).offset(-10)
+            make.bottom.equalTo(self.contentView).offset(-10)
         }
     }
     
@@ -58,9 +58,13 @@ class ZLBlurButton: UIVisualEffectView {
         let animationValue4 = CATransform3DMakeScale(1.0, 1.0, 1.0)
         animation.values = [animationValue1,animationValue2,animationValue3,animationValue4]
         animation.timingFunction = CAMediaTimingFunction(name: "easeInEaseOut")
-        animation.delegate = self
         self.circleView.layer.add(animation, forKey: nil)
         
+        if self.targetDic[.tap] != nil && self.selectorDic[.tap] != nil{
+            let target = self.targetDic[.tap]
+            let selector = self.selectorDic[.tap]
+            Thread.detachNewThreadSelector(selector as! Selector, toTarget: target as Any, with: self)
+        }
     }
     
     @objc private func longPress(_ : UILongPressGestureRecognizer){
@@ -70,15 +74,5 @@ class ZLBlurButton: UIVisualEffectView {
     func addTarget(target : Any?, selector: Selector?, type : ZLBlurButtonActionType!) {
         self.targetDic[type] = target
         self.selectorDic[type] = selector
-    }
-}
-
-extension ZLBlurButton : CAAnimationDelegate{
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        if self.targetDic[.tap] != nil && self.selectorDic[.tap] != nil{
-            let target = self.targetDic[.tap]
-            let selector = self.selectorDic[.tap]
-            Thread.detachNewThreadSelector(selector as! Selector, toTarget: target as Any, with: nil)
-        }
     }
 }

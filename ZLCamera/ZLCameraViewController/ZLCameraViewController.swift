@@ -24,17 +24,30 @@ class ZLCameraViewController: UIViewController {
     private let backButton : UIButton = UIButton(type: .custom)
     private let snapButton : ZLBlurButton = ZLBlurButton(effect: UIBlurEffect(style: .light))
     
+    private var setupComlete : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.setupCamera { (completion) in
             if (completion){
-                self.loadUI()
-                self.startSession()
+                self.setupComlete = true
             }
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.setupComlete {
+            self.startSession()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.stopSession()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -54,7 +67,7 @@ class ZLCameraViewController: UIViewController {
                 DispatchQueue.main.async {
                     let previewVC = ZLPhotoPreviewViewController()
                     previewVC.image = image
-                    self.present(previewVC, animated: false, completion: nil)
+                    self.present(previewVC, animated: true, completion: nil)
                 }
             }
                 
@@ -105,7 +118,6 @@ class ZLCameraViewController: UIViewController {
     }
     
     @objc private func backButton_pressed(_ sender : UIButton){
-        self.stopSession()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -120,9 +132,9 @@ class ZLCameraViewController: UIViewController {
         self.switchButton.addTarget(self, action: #selector(switchCameraPosition(_:)), for: .touchUpInside)
         self.view.addSubview(self.switchButton)
         
-        self.snapButton.circleView.layer.cornerRadius = 32
+        self.snapButton.circleView.layer.cornerRadius = 30
         self.snapButton.circleView.layer.masksToBounds = true
-        self.snapButton.layer.cornerRadius = 44
+        self.snapButton.layer.cornerRadius = 40
         self.snapButton.layer.masksToBounds = true
         self.snapButton.addTarget(target: self, selector: #selector(snapShot(_:)), type: .tap)
         self.view.addSubview(self.snapButton)
@@ -130,7 +142,7 @@ class ZLCameraViewController: UIViewController {
         
         self.backButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.snapButton)
-            make.right.equalTo(self.snapButton.snp.left).offset(-36)
+            make.right.equalTo(self.snapButton.snp.left).offset(-48)
             make.width.equalTo(28)
             make.height.equalTo(28)
         }
@@ -145,8 +157,8 @@ class ZLCameraViewController: UIViewController {
         self.snapButton.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view)
             make.bottom.equalTo(self.view).offset(-24)
-            make.width.equalTo(88)
-            make.height.equalTo(88)
+            make.width.equalTo(80)
+            make.height.equalTo(80)
         }
     }
 
@@ -244,6 +256,7 @@ extension ZLCameraViewController{
                 self?.previewLayer?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
                 self?.view.layer.addSublayer((self?.previewLayer!)!)
                 
+                self?.loadUI()
                 compeltion(true)
             }
         }
