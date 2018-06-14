@@ -53,8 +53,13 @@ class ZLCameraViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @objc private func record(_ : UILongPressGestureRecognizer){
-        
+    @objc private func record(_ state: String){
+        if state == "began" {
+            print("began")
+        }
+        else if state == "ended"{
+            print("ended")
+        }
     }
     
     @objc private func snapShot(_ : UIButton){
@@ -137,6 +142,7 @@ class ZLCameraViewController: UIViewController {
         self.snapButton.layer.cornerRadius = 40
         self.snapButton.layer.masksToBounds = true
         self.snapButton.addTarget(target: self, selector: #selector(snapShot(_:)), type: .tap)
+        self.snapButton.addTarget(target: self, selector: #selector(record(_:)), type: .longPress)
         self.view.addSubview(self.snapButton)
 
         
@@ -179,34 +185,6 @@ class ZLCameraViewController: UIViewController {
     }
     */
 
-}
-
-// MARK: - kvo键值观察
-extension ZLCameraViewController{
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "state"{
-            let state = UIGestureRecognizerState(rawValue: change![NSKeyValueChangeKey.newKey] as! NSNumber.IntegerLiteralType)!
-            switch state{
-                case .began:
-                    print("begin")
-                case .ended:
-                    print("end")
-                case .possible:
-                    fallthrough
-                case .changed:
-                    fallthrough
-                case .cancelled:
-                    fallthrough
-                case .failed:
-                    fallthrough
-                default:
-                    print("ignore")
-            }
-        }
-        else{
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
-    }
 }
 
 // MARK: - 相机配置

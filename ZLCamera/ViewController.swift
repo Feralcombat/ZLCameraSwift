@@ -28,11 +28,12 @@ class ViewController: UIViewController {
     }
     
     private func loadUI(){
-        self.nameLabel.text = "123"
+        self.nameLabel.text = "点我拍照"
         self.nameLabel.font = UIFont.systemFont(ofSize: 12)
         self.nameLabel.textColor = UIColor.blue
         self.nameLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
         self.nameLabel.center = self.view.center
+        self.nameLabel.textAlignment = .center
         self.nameLabel.isUserInteractionEnabled = true
         self.view.addSubview(self.nameLabel)
         

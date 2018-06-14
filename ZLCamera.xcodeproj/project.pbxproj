@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		282B3A3620D10B500092D2B3 /* ZLImageBlurButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282B3A3520D10B500092D2B3 /* ZLImageBlurButton.swift */; };
 		282B3A3820D10E640092D2B3 /* ZLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282B3A3720D10E640092D2B3 /* ZLConstant.swift */; };
+		286ECB7420D1FCA3000A4FC1 /* ZLProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286ECB7320D1FCA3000A4FC1 /* ZLProgressView.swift */; };
 		28891D0A20CE750800A2C4C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28891D0920CE750800A2C4C5 /* AppDelegate.swift */; };
 		28891D0C20CE750800A2C4C5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28891D0B20CE750800A2C4C5 /* ViewController.swift */; };
 		28891D0F20CE750800A2C4C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28891D0D20CE750800A2C4C5 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		282B3A3520D10B500092D2B3 /* ZLImageBlurButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLImageBlurButton.swift; sourceTree = "<group>"; };
 		282B3A3720D10E640092D2B3 /* ZLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLConstant.swift; sourceTree = "<group>"; };
+		286ECB7320D1FCA3000A4FC1 /* ZLProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLProgressView.swift; sourceTree = "<group>"; };
 		28891D0620CE750800A2C4C5 /* ZLCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZLCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28891D0920CE750800A2C4C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28891D0B20CE750800A2C4C5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				282B3A3520D10B500092D2B3 /* ZLImageBlurButton.swift */,
 				28891D1C20CE755900A2C4C5 /* ZLCameraViewController.swift */,
 				28D0DA8A20D0B5F3008DBCEE /* ZLPhotoPreviewViewController.swift */,
+				286ECB7320D1FCA3000A4FC1 /* ZLProgressView.swift */,
 			);
 			path = ZLCameraViewController;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				282B3A3620D10B500092D2B3 /* ZLImageBlurButton.swift in Sources */,
 				282B3A3820D10E640092D2B3 /* ZLConstant.swift in Sources */,
 				28D0DA8B20D0B5F3008DBCEE /* ZLPhotoPreviewViewController.swift in Sources */,
+				286ECB7420D1FCA3000A4FC1 /* ZLProgressView.swift in Sources */,
 				28D0DA8D20D0DF95008DBCEE /* ZLBlurButton.swift in Sources */,
 				28891D0A20CE750800A2C4C5 /* AppDelegate.swift in Sources */,
 			);
