@@ -14,14 +14,20 @@ enum ZLBlurButtonActionType{
     case longPress
 }
 
+@objc protocol ZLBlurButtonDelegate {
+    func blurButtonPressed(button : ZLBlurButton)
+    func blurButtonLongPressed(button : ZLBlurButton , began : Bool)
+}
+
 class ZLBlurButton: UIVisualEffectView {
 
     let circleView : UIView = UIView()
+    weak var delegate : ZLBlurButtonDelegate? = nil
     
+    private let progressView : ZLProgressView = ZLProgressView()
+
     private var tapGesture : UITapGestureRecognizer? = nil
     private var longGesture : UILongPressGestureRecognizer? = nil
-    private var targetDic : Dictionary<ZLBlurButtonActionType,Any?> = [.tap:nil,.longPress:nil]
-    private var selectorDic : Dictionary<ZLBlurButtonActionType,Selector?> = [.tap:nil,.longPress:nil]
     
     deinit {
         self.longGesture?.removeObserver(self, forKeyPath: "state")
@@ -44,10 +50,9 @@ class ZLBlurButton: UIVisualEffectView {
         self.longGesture?.addObserver(self, forKeyPath: "state", options: .new, context: nil)
         
         self.circleView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(10)
-            make.left.equalTo(self.contentView).offset(10)
-            make.right.equalTo(self.contentView).offset(-10)
-            make.bottom.equalTo(self.contentView).offset(-10)
+            make.center.equalTo(self.contentView)
+            make.width.equalTo(60)
+            make.height.equalTo(60)
         }
     }
     
@@ -68,20 +73,24 @@ class ZLBlurButton: UIVisualEffectView {
         animation.timingFunction = CAMediaTimingFunction(name: "easeInEaseOut")
         self.circleView.layer.add(animation, forKey: nil)
         
-        if self.targetDic[.tap] != nil && self.selectorDic[.tap] != nil{
-            let target = self.targetDic[.tap]
-            let selector = self.selectorDic[.tap]
-            Thread.detachNewThreadSelector(selector as! Selector, toTarget: target as Any, with: self)
-        }
+        self.delegate?.blurButtonPressed(button: self)
+        
     }
     
     @objc private func longPress(_ : UILongPressGestureRecognizer){
         
     }
     
-    func addTarget(target : Any?, selector: Selector?, type : ZLBlurButtonActionType!) {
-        self.targetDic[type] = target
-        self.selectorDic[type] = selector
+    func setProgress(_ progress : Float) {
+        if !self.contentView.subviews.contains(self.progressView) {
+            self.progressView.frame = self.contentView.bounds
+            self.contentView.addSubview(self.progressView)
+        }
+        self.progressView.setProgress(progress)
+    }
+    
+    func requestEndLongPress() {
+        self.longGesture?.isEnabled = false
     }
 }
 
@@ -90,18 +99,16 @@ extension ZLBlurButton{
         if keyPath == "state" {
             let state = UIGestureRecognizerState(rawValue: change![NSKeyValueChangeKey.newKey] as! NSNumber.IntegerLiteralType)
             if state == .began{
-                if self.targetDic[.longPress] != nil && self.selectorDic[.longPress] != nil{
-                    let target = self.targetDic[.longPress]
-                    let selector = self.selectorDic[.longPress]
-                    Thread.detachNewThreadSelector(selector as! Selector, toTarget: target as Any, with: "began")
-                }
+                self.delegate?.blurButtonLongPressed(button: self, began: true)
             }
             else if state == .ended{
-                if self.targetDic[.longPress] != nil && self.selectorDic[.longPress] != nil{
-                    let target = self.targetDic[.longPress]
-                    let selector = self.selectorDic[.longPress]
-                    Thread.detachNewThreadSelector(selector as! Selector, toTarget: target as Any, with: "ended")
-                }
+                self.progressView.removeFromSuperview()
+                self.delegate?.blurButtonLongPressed(button: self, began: false)
+            }
+            else if state == .cancelled{
+                self.progressView.removeFromSuperview()
+                self.delegate?.blurButtonLongPressed(button: self, began: false)
+                self.longGesture?.isEnabled = true
             }
         }
         else{

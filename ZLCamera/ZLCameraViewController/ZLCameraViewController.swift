@@ -12,6 +12,8 @@ import SnapKit
 
 class ZLCameraViewController: UIViewController {
     
+    var maxVideoDuration : Float? = 30
+    
     private var videoDevice : AVCaptureDevice? = nil
     private var audioDevice : AVCaptureDevice? = nil
     private var videoInput : AVCaptureDeviceInput? = nil
@@ -25,13 +27,15 @@ class ZLCameraViewController: UIViewController {
     private let snapButton : ZLBlurButton = ZLBlurButton(effect: UIBlurEffect(style: .light))
     
     private var setupComlete : Bool = false
+    private var countTimer : Timer? = nil
+    private var currentTime : Float = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.setupCamera { (completion) in
+        self.setupCamera { [weak self] (completion) in
             if (completion){
-                self.setupComlete = true
+                self?.setupComlete = true
             }
         }
     }
@@ -53,30 +57,31 @@ class ZLCameraViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @objc private func record(_ state: String){
-        if state == "began" {
-            print("began")
-        }
-        else if state == "ended"{
-            print("ended")
-        }
+    private func startRecord(){
+        let filePath : String = NSUUID().uuidString
+
+        self.countTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(calculateMaxDuration(_:)), userInfo: nil, repeats: true)
+        
+        let outputUrl : URL = URL(fileURLWithPath: NSTemporaryDirectory() + filePath + ".mov")
+        self.movieOutput?.startRecording(to: outputUrl, recordingDelegate: self as AVCaptureFileOutputRecordingDelegate)
     }
     
-    @objc private func snapShot(_ : UIButton){
-        self.imageOutput?.captureStillImageAsynchronously(from: (self.imageOutput?.connection(with: .video))!, completionHandler: { (buffer, error) in
-            if error != nil {return}
-            
-            if buffer != nil{
-                let data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer!)
-                let image = UIImage(data: data!)
-                DispatchQueue.main.async {
-                    let previewVC = ZLPhotoPreviewViewController()
-                    previewVC.image = image
-                    self.present(previewVC, animated: true, completion: nil)
-                }
-            }
-                
-        })
+    private func endRecord(){
+        self.countTimer?.invalidate()
+        self.countTimer = nil
+        self.currentTime = 0
+        self.movieOutput?.stopRecording()
+    }
+    
+    @objc private func calculateMaxDuration(_ : Timer){
+        self.currentTime = self.currentTime + 1
+        if self.currentTime > self.maxVideoDuration!{
+            self.snapButton.requestEndLongPress()
+            self.endRecord()
+        }
+        else{
+            self.snapButton.setProgress(self.currentTime/self.maxVideoDuration!)
+        }
     }
     
     @objc private func switchCameraPosition(_ : UIButton){
@@ -141,8 +146,7 @@ class ZLCameraViewController: UIViewController {
         self.snapButton.circleView.layer.masksToBounds = true
         self.snapButton.layer.cornerRadius = 40
         self.snapButton.layer.masksToBounds = true
-        self.snapButton.addTarget(target: self, selector: #selector(snapShot(_:)), type: .tap)
-        self.snapButton.addTarget(target: self, selector: #selector(record(_:)), type: .longPress)
+        self.snapButton.delegate = self
         self.view.addSubview(self.snapButton)
 
         
@@ -187,6 +191,93 @@ class ZLCameraViewController: UIViewController {
 
 }
 
+extension ZLCameraViewController : AVCaptureFileOutputRecordingDelegate{
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        let previewVC = ZLVideoPreviewViewController()
+        previewVC.playerUrl = outputFileURL
+        self.present(previewVC, animated: true, completion: nil)
+    }
+}
+
+extension ZLCameraViewController : ZLBlurButtonDelegate{
+    func blurButtonPressed(button: ZLBlurButton) {
+        self.imageOutput?.captureStillImageAsynchronously(from: (self.imageOutput?.connection(with: .video))!, completionHandler: { (buffer, error) in
+            if error != nil {return}
+            
+            if buffer != nil{
+                let data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer!)
+                let image = UIImage(data: data!)
+                DispatchQueue.main.async { [weak self] in
+                    let previewVC = ZLPhotoPreviewViewController()
+                    previewVC.image = image
+                    self?.present(previewVC, animated: true, completion: nil)
+                }
+            }
+            
+        })
+    }
+    
+    func blurButtonLongPressed(button: ZLBlurButton, began: Bool) {
+        if began {
+            UIView.setAnimationCurve(.easeInOut)
+            UIView.animate(withDuration: 0.1, animations: { [weak self] in
+                self?.snapButton.snp.updateConstraints { (make) in
+                    make.width.equalTo(102)
+                    make.height.equalTo(102)
+                }
+
+                self?.snapButton.circleView.snp.updateConstraints({ (make) in
+                    make.width.equalTo(44)
+                    make.height.equalTo(44)
+                })
+
+                self?.snapButton.layer.cornerRadius = 51
+                self?.snapButton.circleView.layer.cornerRadius = 22
+
+                self?.view.layoutIfNeeded()
+            }) {[weak self] (finish) in
+                self?.startRecord()
+            }
+        }
+        else{
+            self.snapButton.snp.updateConstraints { (make) in
+                make.width.equalTo(80)
+                make.height.equalTo(80)
+            }
+            
+            self.snapButton.circleView.snp.updateConstraints({ (make) in
+                make.width.equalTo(60)
+                make.height.equalTo(60)
+            })
+            
+            self.snapButton.layer.cornerRadius = 40
+            self.snapButton.circleView.layer.cornerRadius = 30
+            self.endRecord()
+
+//            UIView.setAnimationCurve(.easeInOut)
+//            UIView.animate(withDuration: 0.1, animations: { [weak self] in
+//                self?.snapButton.snp.updateConstraints { (make) in
+//                    make.width.equalTo(80)
+//                    make.height.equalTo(80)
+//                }
+//
+//                self?.snapButton.circleView.snp.updateConstraints({ (make) in
+//                    make.width.equalTo(60)
+//                    make.height.equalTo(60)
+//                })
+//
+//                self?.snapButton.layer.cornerRadius = 40
+//                self?.snapButton.circleView.layer.cornerRadius = 30
+//
+//                self?.view.layoutIfNeeded()
+//            }) {[weak self] (finish) in
+//                self?.endRecord()
+//            }
+        }
+    }
+    
+}
+
 // MARK: - 相机配置
 extension ZLCameraViewController{
     private func isRearCameraAvailable() -> Bool{
@@ -225,6 +316,11 @@ extension ZLCameraViewController{
             
             if (self?.session?.canAddOutput((self?.movieOutput!)!))!{
                 self?.session?.addOutput((self?.movieOutput!)!)
+                
+//                let connection = self?.movieOutput?.connection(with: .video)
+//                if (connection?.isVideoStabilizationSupported)!{
+//                    connection?.preferredVideoStabilizationMode = .cinematic
+//                }
             }
             
             DispatchQueue.main.async { [weak self] in

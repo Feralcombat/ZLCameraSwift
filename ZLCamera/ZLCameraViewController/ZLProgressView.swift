@@ -19,8 +19,8 @@ class ZLProgressView: UIView {
         self.progressLayer.fillColor = UIColor.clear.cgColor
         self.progressLayer.strokeColor = UIColor.red.cgColor
         self.progressLayer.opacity = 1
-        self.progressLayer.lineCap = kCALineCapRound
-        self.progressLayer.lineWidth = 4
+//        self.progressLayer.lineCap = kCALineCapRound
+        self.progressLayer.lineWidth = 8
         
         self.progressLayer.shadowColor = UIColor.black.cgColor
         self.progressLayer.shadowOffset = CGSize(width: 1, height: 1)
@@ -47,6 +47,6 @@ class ZLProgressView: UIView {
     
     func setProgress(_ progress : Float) {
         self.progress = progress
-        self.setNeedsLayout()
+        self.layer.setNeedsDisplay()
     }
 }
