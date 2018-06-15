@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     }
 
     @objc private func action(_ : UITapGestureRecognizer) {
-        let vc = ZLCameraViewController()
+        let vc = ZLCameraViewController(delegate: self as? ZLCameraViewControllerDelegate)
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -42,3 +42,16 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController : ZLCameraViewControllerDelegate{
+    func cameraViewControllerDidDismiss(_ cameraViewController: ZLCameraViewController) {
+        
+    }
+    
+    func cameraViewController(_ cameraViewController: ZLCameraViewController, didFinishPick image: UIImage) {
+        
+    }
+    
+    func cameraViewController(_ cameraViewController: ZLCameraViewController, didFinishPickVideo url: URL) {
+        
+    }
+}

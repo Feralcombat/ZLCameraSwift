@@ -8,11 +8,20 @@
 
 import UIKit
 
-class ZLCameraViewController: UINavigationController {
+@objc protocol ZLCameraViewControllerDelegate{
+    @objc optional func cameraViewControllerDidDismiss(_ cameraViewController: ZLCameraViewController)
+    @objc optional func cameraViewController(_ cameraViewController: ZLCameraViewController, didFinishPick image : UIImage)
+    @objc optional func cameraViewController(_ cameraViewController: ZLCameraViewController, didFinishPickVideo url : URL)
+}
 
-    convenience init() {
+class ZLCameraViewController: UINavigationController {
+    weak var cameraDelegate : ZLCameraViewControllerDelegate? = nil
+    
+    convenience init(delegate : ZLCameraViewControllerDelegate?) {
         let rootVC = ZLCaptureViewController()
         self.init(rootViewController: rootVC)
+        self.cameraDelegate = delegate
+        rootVC.delegate = self
     }
     
     override func viewDidLoad() {
@@ -26,7 +35,6 @@ class ZLCameraViewController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -37,6 +45,21 @@ class ZLCameraViewController: UINavigationController {
     }
     */
 
+}
+
+extension ZLCameraViewController : ZLCaptureViewControllerDelegate{
+    func captureViewControllerDidDismiss(_ captureViewController: ZLCaptureViewController) {
+        self.cameraDelegate?.cameraViewControllerDidDismiss?(self)
+    }
+    
+    func captureViewController(_ captureViewController: ZLCaptureViewController, didFinishPick image: UIImage) {
+        self.cameraDelegate?.cameraViewController?(self, didFinishPick: image)
+    }
+    
+    func captureViewController(_ captureViewController: ZLCaptureViewController, didFinishPickVideo url: URL) {
+        self.cameraDelegate?.cameraViewController?(self, didFinishPickVideo: url)
+    }
+    
 }
 
 extension ZLCameraViewController : UINavigationControllerDelegate{

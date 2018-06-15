@@ -8,8 +8,13 @@
 
 import UIKit
 
+@objc protocol ZLPhotoPreviewViewControllerDelegate{
+    func photoPreviewViewController(_ previewViewController: ZLPhotoPreviewViewController, didFinishPick image: UIImage)
+}
+
 class ZLPhotoPreviewViewController: UIViewController {
     var image : UIImage? = nil
+    weak var delegate : ZLPhotoPreviewViewControllerDelegate? = nil
     
     private let imageView : UIImageView = UIImageView()
     private let backButton : ZLImageBlurButton = ZLImageBlurButton(effect: UIBlurEffect(style: .light))
@@ -28,7 +33,8 @@ class ZLPhotoPreviewViewController: UIViewController {
     }
     
     @objc private func confirmButton_pressed(_ : UIButton){
-        
+        self.delegate?.photoPreviewViewController(self, didFinishPick: self.image!)
+        self.navigationController?.popViewController(animated: false)
     }
     
     @objc private func backButton_pressed(_ : Any){
@@ -39,13 +45,12 @@ class ZLPhotoPreviewViewController: UIViewController {
         self.imageView.image = self.image
         self.view.addSubview(self.imageView)
         
-        
-        
         self.confirmButton.backgroundColor = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.0)
         self.confirmButton.frame = CGRect(x: (DeviceWidth() - 80)/2, y: DeviceHeight() - 112, width: 80, height: 80)
         self.confirmButton.setImage(UIImage(named: "video_icon_back_student"), for: .normal)
         self.confirmButton.layer.cornerRadius = 40
         self.confirmButton.clipsToBounds = true
+        self.confirmButton.addTarget(self, action: #selector(confirmButton_pressed(_:)), for: .touchUpInside)
         self.view.addSubview(self.confirmButton)
         
         self.backButton.setContentImage(UIImage(named: "video_icon_back"))

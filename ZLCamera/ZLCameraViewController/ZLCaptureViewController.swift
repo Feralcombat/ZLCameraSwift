@@ -10,9 +10,16 @@ import UIKit
 import AVFoundation
 import SnapKit
 
+@objc protocol ZLCaptureViewControllerDelegate{
+    func captureViewControllerDidDismiss(_ captureViewController: ZLCaptureViewController)
+    func captureViewController(_ captureViewController : ZLCaptureViewController, didFinishPick image: UIImage)
+    func captureViewController(_ captureViewController : ZLCaptureViewController, didFinishPickVideo url: URL)
+}
+
 class ZLCaptureViewController: UIViewController {
     
     var maxVideoDuration : Float? = 30
+    weak var delegate : ZLCaptureViewControllerDelegate?
     
     private var videoDevice : AVCaptureDevice? = nil
     private var audioDevice : AVCaptureDevice? = nil
@@ -25,8 +32,10 @@ class ZLCaptureViewController: UIViewController {
     private let switchButton : UIButton = UIButton(type: .custom)
     private let backButton : UIButton = UIButton(type: .custom)
     private let snapButton : ZLBlurButton = ZLBlurButton(effect: UIBlurEffect(style: .light))
+    private let noticeLabel : UILabel = UILabel()
     
     private var setupComlete : Bool = false
+    private var needStartSession : Bool = true
     private var countTimer : Timer? = nil
     private var currentTime : Float = 0
     
@@ -37,6 +46,7 @@ class ZLCaptureViewController: UIViewController {
         self.setupCamera { [weak self] (completion) in
             if (completion){
                 self?.setupComlete = true
+                self?.perform(#selector(self?.hideTip), with: nil, afterDelay: 1.5)
             }
         }
     }
@@ -44,7 +54,9 @@ class ZLCaptureViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if self.setupComlete {
-            self.startSession()
+            if self.needStartSession{
+                self.startSession()
+            }
         }
     }
     
@@ -129,7 +141,13 @@ class ZLCaptureViewController: UIViewController {
     }
     
     @objc private func backButton_pressed(_ sender : UIButton){
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) {[weak self] in
+            self?.delegate?.captureViewControllerDidDismiss(self!)
+        }
+    }
+    
+    @objc private func hideTip(){
+        self.noticeLabel.isHidden = true
     }
     
     private func loadUI(){
@@ -143,6 +161,11 @@ class ZLCaptureViewController: UIViewController {
         self.switchButton.addTarget(self, action: #selector(switchCameraPosition(_:)), for: .touchUpInside)
         self.view.addSubview(self.switchButton)
         
+        self.noticeLabel.font = UIFont.systemFont(ofSize: 14)
+        self.noticeLabel.text = "轻触拍照，按住摄像"
+        self.noticeLabel.textColor = UIColor.white
+        self.view.addSubview(self.noticeLabel)
+        
         self.snapButton.circleView.layer.cornerRadius = 30
         self.snapButton.circleView.layer.masksToBounds = true
         self.snapButton.layer.cornerRadius = 40
@@ -150,7 +173,6 @@ class ZLCaptureViewController: UIViewController {
         self.snapButton.delegate = self
         self.view.addSubview(self.snapButton)
 
-        
         self.backButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.snapButton)
             make.right.equalTo(self.snapButton.snp.left).offset(-48)
@@ -163,6 +185,13 @@ class ZLCaptureViewController: UIViewController {
             make.right.equalTo(self.view).offset(-12)
             make.width.equalTo(28)
             make.height.equalTo(28)
+        }
+        
+        self.noticeLabel.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self.snapButton.snp.top).offset(-12)
+            make.width.lessThanOrEqualTo(200)
+            make.height.equalTo(14)
+            make.centerX.equalTo(self.view)
         }
         
         self.snapButton.snp.makeConstraints { (make) in
@@ -192,11 +221,31 @@ class ZLCaptureViewController: UIViewController {
 
 }
 
+extension ZLCaptureViewController : ZLPhotoPreviewViewControllerDelegate{
+    func photoPreviewViewController(_ previewViewController: ZLPhotoPreviewViewController, didFinishPick image: UIImage) {
+        self.needStartSession = false
+        self.delegate?.captureViewController(self, didFinishPick: image)
+        self.dismiss(animated: true) {[weak self] in
+            self?.delegate?.captureViewControllerDidDismiss(self!)
+        }
+    }
+}
+
+extension ZLCaptureViewController : ZLVideoPreviewViewControllerDelegate{
+    func videoPreviewViewController(_ videoPreviewController: ZLVideoPreviewViewController, didFinishPick videoUrl: URL) {
+        self.needStartSession = false
+        self.delegate?.captureViewController(self, didFinishPickVideo: videoUrl)
+        self.dismiss(animated: true) {[weak self] in
+            self?.delegate?.captureViewControllerDidDismiss(self!)
+        }
+    }
+}
+
 extension ZLCaptureViewController : AVCaptureFileOutputRecordingDelegate{
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         let previewVC = ZLVideoPreviewViewController()
         previewVC.playerUrl = outputFileURL
-//        self.present(previewVC, animated: true, completion: nil)
+        previewVC.delegate = self
         self.navigationController?.pushViewController(previewVC, animated: true)
     }
 }
@@ -212,7 +261,7 @@ extension ZLCaptureViewController : ZLBlurButtonDelegate{
                 DispatchQueue.main.async { [weak self] in
                     let previewVC = ZLPhotoPreviewViewController()
                     previewVC.image = image
-//                    self?.present(previewVC, animated: true, completion: nil)
+                    previewVC.delegate = self
                     self?.navigationController?.pushViewController(previewVC, animated: true)
                 }
             }
@@ -256,26 +305,6 @@ extension ZLCaptureViewController : ZLBlurButtonDelegate{
             self.snapButton.layer.cornerRadius = 40
             self.snapButton.circleView.layer.cornerRadius = 30
             self.endRecord()
-
-//            UIView.setAnimationCurve(.easeInOut)
-//            UIView.animate(withDuration: 0.1, animations: { [weak self] in
-//                self?.snapButton.snp.updateConstraints { (make) in
-//                    make.width.equalTo(80)
-//                    make.height.equalTo(80)
-//                }
-//
-//                self?.snapButton.circleView.snp.updateConstraints({ (make) in
-//                    make.width.equalTo(60)
-//                    make.height.equalTo(60)
-//                })
-//
-//                self?.snapButton.layer.cornerRadius = 40
-//                self?.snapButton.circleView.layer.cornerRadius = 30
-//
-//                self?.view.layoutIfNeeded()
-//            }) {[weak self] (finish) in
-//                self?.endRecord()
-//            }
         }
     }
     
@@ -320,10 +349,10 @@ extension ZLCaptureViewController{
             if (self?.session?.canAddOutput((self?.movieOutput!)!))!{
                 self?.session?.addOutput((self?.movieOutput!)!)
                 
-//                let connection = self?.movieOutput?.connection(with: .video)
-//                if (connection?.isVideoStabilizationSupported)!{
-//                    connection?.preferredVideoStabilizationMode = .cinematic
-//                }
+                let connection = self?.movieOutput?.connection(with: .video)
+                if (connection?.isVideoStabilizationSupported)!{
+                    connection?.preferredVideoStabilizationMode = .cinematic
+                }
             }
             
             DispatchQueue.main.async { [weak self] in

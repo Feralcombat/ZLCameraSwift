@@ -9,8 +9,13 @@
 import UIKit
 import AVKit
 
+@objc protocol ZLVideoPreviewViewControllerDelegate{
+    func videoPreviewViewController(_ videoPreviewController: ZLVideoPreviewViewController, didFinishPick videoUrl : URL)
+}
+
 class ZLVideoPreviewViewController: UIViewController {
     var playerUrl : URL? = nil
+    weak var delegate : ZLVideoPreviewViewControllerDelegate? = nil
     
     private var playerLayer : AVPlayerLayer? = nil
     private let backButton : ZLImageBlurButton = ZLImageBlurButton(effect: UIBlurEffect(style: .light))
@@ -29,7 +34,8 @@ class ZLVideoPreviewViewController: UIViewController {
     }
     
     @objc private func confirmButton_pressed(_ : UIButton){
-        
+        self.delegate?.videoPreviewViewController(self, didFinishPick: self.playerUrl!)
+        self.navigationController?.popViewController(animated: false)
     }
     
     @objc private func backButton_pressed(_ : Any){
@@ -51,6 +57,7 @@ class ZLVideoPreviewViewController: UIViewController {
         self.confirmButton.setImage(UIImage(named: "video_icon_back_student"), for: .normal)
         self.confirmButton.layer.cornerRadius = 40
         self.confirmButton.clipsToBounds = true
+        self.confirmButton.addTarget(self, action: #selector(confirmButton_pressed(_:)), for: .touchUpInside)
         self.view.addSubview(self.confirmButton)
         
         self.backButton.setContentImage(UIImage(named: "video_icon_back"))
