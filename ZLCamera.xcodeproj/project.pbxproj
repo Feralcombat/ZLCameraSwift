@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		282B3A3620D10B500092D2B3 /* ZLImageBlurButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282B3A3520D10B500092D2B3 /* ZLImageBlurButton.swift */; };
 		282B3A3820D10E640092D2B3 /* ZLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282B3A3720D10E640092D2B3 /* ZLConstant.swift */; };
+		28483B0920D39A910017107E /* ZLCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28483B0820D39A910017107E /* ZLCameraViewController.swift */; };
 		286ECB7420D1FCA3000A4FC1 /* ZLProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286ECB7320D1FCA3000A4FC1 /* ZLProgressView.swift */; };
 		286ECB7C20D25FDE000A4FC1 /* ZLVideoPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286ECB7B20D25FDE000A4FC1 /* ZLVideoPreviewViewController.swift */; };
 		28891D0A20CE750800A2C4C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28891D0920CE750800A2C4C5 /* AppDelegate.swift */; };
@@ -16,7 +17,7 @@
 		28891D0F20CE750800A2C4C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28891D0D20CE750800A2C4C5 /* Main.storyboard */; };
 		28891D1120CE750A00A2C4C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28891D1020CE750A00A2C4C5 /* Assets.xcassets */; };
 		28891D1420CE750A00A2C4C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28891D1220CE750A00A2C4C5 /* LaunchScreen.storyboard */; };
-		28891D1D20CE755900A2C4C5 /* ZLCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28891D1C20CE755900A2C4C5 /* ZLCameraViewController.swift */; };
+		28891D1D20CE755900A2C4C5 /* ZLCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28891D1C20CE755900A2C4C5 /* ZLCaptureViewController.swift */; };
 		28D0DA8B20D0B5F3008DBCEE /* ZLPhotoPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D0DA8A20D0B5F3008DBCEE /* ZLPhotoPreviewViewController.swift */; };
 		28D0DA8D20D0DF95008DBCEE /* ZLBlurButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D0DA8C20D0DF95008DBCEE /* ZLBlurButton.swift */; };
 		500312FBF414CA2875B4B4AD /* Pods_ZLCamera.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CA1E582EC339FE109A8426 /* Pods_ZLCamera.framework */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		282B3A3520D10B500092D2B3 /* ZLImageBlurButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLImageBlurButton.swift; sourceTree = "<group>"; };
 		282B3A3720D10E640092D2B3 /* ZLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLConstant.swift; sourceTree = "<group>"; };
+		28483B0820D39A910017107E /* ZLCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLCameraViewController.swift; sourceTree = "<group>"; };
 		286ECB7320D1FCA3000A4FC1 /* ZLProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLProgressView.swift; sourceTree = "<group>"; };
 		286ECB7B20D25FDE000A4FC1 /* ZLVideoPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLVideoPreviewViewController.swift; sourceTree = "<group>"; };
 		28891D0620CE750800A2C4C5 /* ZLCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZLCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,7 +36,7 @@
 		28891D1020CE750A00A2C4C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28891D1320CE750A00A2C4C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28891D1520CE750A00A2C4C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		28891D1C20CE755900A2C4C5 /* ZLCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLCameraViewController.swift; sourceTree = "<group>"; };
+		28891D1C20CE755900A2C4C5 /* ZLCaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLCaptureViewController.swift; sourceTree = "<group>"; };
 		28CA1E582EC339FE109A8426 /* Pods_ZLCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZLCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D0DA8A20D0B5F3008DBCEE /* ZLPhotoPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLPhotoPreviewViewController.swift; sourceTree = "<group>"; };
 		28D0DA8C20D0DF95008DBCEE /* ZLBlurButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLBlurButton.swift; sourceTree = "<group>"; };
@@ -93,7 +95,8 @@
 				28D0DA8C20D0DF95008DBCEE /* ZLBlurButton.swift */,
 				286ECB7320D1FCA3000A4FC1 /* ZLProgressView.swift */,
 				282B3A3520D10B500092D2B3 /* ZLImageBlurButton.swift */,
-				28891D1C20CE755900A2C4C5 /* ZLCameraViewController.swift */,
+				28483B0820D39A910017107E /* ZLCameraViewController.swift */,
+				28891D1C20CE755900A2C4C5 /* ZLCaptureViewController.swift */,
 				28D0DA8A20D0B5F3008DBCEE /* ZLPhotoPreviewViewController.swift */,
 				286ECB7B20D25FDE000A4FC1 /* ZLVideoPreviewViewController.swift */,
 			);
@@ -247,8 +250,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				28891D0C20CE750800A2C4C5 /* ViewController.swift in Sources */,
-				28891D1D20CE755900A2C4C5 /* ZLCameraViewController.swift in Sources */,
+				28891D1D20CE755900A2C4C5 /* ZLCaptureViewController.swift in Sources */,
 				282B3A3620D10B500092D2B3 /* ZLImageBlurButton.swift in Sources */,
+				28483B0920D39A910017107E /* ZLCameraViewController.swift in Sources */,
 				282B3A3820D10E640092D2B3 /* ZLConstant.swift in Sources */,
 				28D0DA8B20D0B5F3008DBCEE /* ZLPhotoPreviewViewController.swift in Sources */,
 				286ECB7C20D25FDE000A4FC1 /* ZLVideoPreviewViewController.swift in Sources */,

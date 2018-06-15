@@ -33,7 +33,7 @@ class ZLVideoPreviewViewController: UIViewController {
     }
     
     @objc private func backButton_pressed(_ : Any){
-        self.dismiss(animated: false, completion: nil)
+        self.navigationController?.popViewController(animated: false)
     }
     
     private func loadUI(){
