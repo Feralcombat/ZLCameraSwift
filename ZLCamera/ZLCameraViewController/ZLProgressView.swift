@@ -17,10 +17,10 @@ class ZLProgressView: UIView {
         
         self.backgroundColor = UIColor.clear
         self.progressLayer.fillColor = UIColor.clear.cgColor
-        self.progressLayer.strokeColor = UIColor.red.cgColor
+        self.progressLayer.strokeColor = UIColor(red: 78.0/255.0, green: 148.0/255.0, blue: 77.0/255.0, alpha: 1.0).cgColor
         self.progressLayer.opacity = 1
 //        self.progressLayer.lineCap = kCALineCapRound
-        self.progressLayer.lineWidth = 8
+        self.progressLayer.lineWidth = 4
         
         self.progressLayer.shadowColor = UIColor.black.cgColor
         self.progressLayer.shadowOffset = CGSize(width: 1, height: 1)

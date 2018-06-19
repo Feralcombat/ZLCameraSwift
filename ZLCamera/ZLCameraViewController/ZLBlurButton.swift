@@ -83,7 +83,7 @@ class ZLBlurButton: UIVisualEffectView {
     
     func setProgress(_ progress : Float) {
         if !self.contentView.subviews.contains(self.progressView) {
-            self.progressView.frame = self.contentView.bounds
+            self.progressView.frame = CGRect(x: 2, y: 2, width: self.contentView.bounds.size.width - 4, height: self.contentView.bounds.size.height - 4)
             self.contentView.addSubview(self.progressView)
         }
         self.progressView.setProgress(progress)
