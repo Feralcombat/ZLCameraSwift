@@ -112,7 +112,7 @@ extension ZLBlurButton{
             }
         }
         else{
-            return super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
 }
