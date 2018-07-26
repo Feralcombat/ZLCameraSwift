@@ -38,31 +38,37 @@ class ZLCaptureViewController: UIViewController {
     private var needStartSession : Bool = true
     private var countTimer : Timer? = nil
     private var currentTime : Float = 0
-    
+    private var hasPriority : Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.setupCamera { [weak self] (completion) in
-            if (completion){
-                self?.setupComlete = true
-                self?.perform(#selector(self?.hideTip), with: nil, afterDelay: 1.5)
+        if self.configAuthorization() {
+            self.setupCamera { [weak self] (completion) in
+                if (completion){
+                    self?.setupComlete = true
+                    self?.perform(#selector(self?.hideTip), with: nil, afterDelay: 1.5)
+                }
             }
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if self.setupComlete {
-            if self.needStartSession{
-                self.startSession()
+        if self.hasPriority {
+            if self.setupComlete {
+                if self.needStartSession{
+                    self.startSession()
+                }
             }
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.stopSession()
+        if self.hasPriority {
+            self.stopSession()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -320,7 +326,7 @@ extension ZLCaptureViewController{
         return UIImagePickerController.isCameraDeviceAvailable(.front)
     }
     
-    private func setupCamera(compeltion: @escaping (_  : Bool) -> Void){
+    private func setupCamera(completion: @escaping (_  : Bool) -> Void){
         DispatchQueue.global(qos: .default).async { [weak self] in
             self?.videoDevice = AVCaptureDevice.default(for: .video)
             self?.audioDevice = AVCaptureDevice.default(for: .audio)
@@ -363,7 +369,7 @@ extension ZLCaptureViewController{
                 self?.view.layer.addSublayer((self?.previewLayer!)!)
                 
                 self?.loadUI()
-                compeltion(true)
+                completion(true)
             }
         }
     }
@@ -383,12 +389,16 @@ extension ZLCaptureViewController{
         }
     }
     
-    private func configAuthorization(){
+    private func configAuthorization() -> Bool{
         let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
         if authStatus == .denied || authStatus == .restricted {
             let alert = UIAlertView(title: "没有相机权限", message: "请去设置-隐私-相机中对应用授权", delegate: self, cancelButtonTitle: "好的");
             alert.show()
+            self.hasPriority = false;
+            return false
         }
+        self.hasPriority = true;
+        return true
     }
 }
 
