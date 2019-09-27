@@ -39,6 +39,7 @@ class ZLCaptureViewController: UIViewController {
     private var countTimer : Timer? = nil
     private var currentTime : Float = 0
     private var hasPriority : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

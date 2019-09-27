@@ -20,6 +20,7 @@ class ZLCameraViewController: UINavigationController {
     convenience init(delegate : ZLCameraViewControllerDelegate?) {
         let rootVC = ZLCaptureViewController()
         self.init(rootViewController: rootVC)
+        self.modalPresentationStyle = .fullScreen;
         self.cameraDelegate = delegate
         rootVC.delegate = self
     }
